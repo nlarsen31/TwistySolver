@@ -44,12 +44,8 @@ public class View extends JFrame implements ActionListener{
 	JButton right[] = new JButton[9];
 	JButton left[] = new JButton[9];
 	private void initialize() {
-		//frame = new JFrame();
-		//frame.getContentPane().setBackground(Color.BLACK);
-		//frame.setBounds(100, 100, 450, 614);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.getContentPane().setLayout(null);
-		this.setBounds(100, 100, 450, 614);
+		
+		this.setBounds(100, 101, 450, 614);
 		this.setVisible(true);
 		this.getContentPane().setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
