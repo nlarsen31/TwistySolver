@@ -24,6 +24,12 @@ public class Controller extends View implements ActionListener{
 	}
 	public Controller() {
 		super();
+		super.leftTurn.addActionListener(this);
+		this.rightTurn.addActionListener(this);
+		this.backTurn.addActionListener(this);
+		this.frontTurn.addActionListener(this);
+		this.bottomTurn.addActionListener(this);
+		this.upTurn.addActionListener(this);
 		for (int i = 0; i < back.length; i++) {
 			back[i].addActionListener(this);
 			up[i].addActionListener(this);
@@ -54,6 +60,9 @@ public class Controller extends View implements ActionListener{
 		}
 		if(Arrays.asList(front).contains(clicked)) {
 			System.out.printf("FRONT %d\n",Arrays.asList(front).indexOf(clicked));
+		}
+		if(clicked.equals(frontTurn)) {
+			System.out.println("turn the cube front");
 		}
 	}
 
