@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,7 +9,7 @@ import javax.swing.JButton;
 
 public class View extends JFrame implements ActionListener{
 
-	private JFrame frame;
+	//private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -18,7 +19,7 @@ public class View extends JFrame implements ActionListener{
 			public void run() {
 				try {
 					View window = new View();
-					window.frame.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,20 +44,23 @@ public class View extends JFrame implements ActionListener{
 	JButton right[] = new JButton[9];
 	JButton left[] = new JButton[9];
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.BLACK);
-		frame.setBounds(100, 100, 450, 614);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-
-		initButtons(up, Color.BLUE,124,77,30);
-		initButtons(front, Color.WHITE,124,175,30);
-		initButtons(bottom, Color.GREEN,124,273,30);
-		initButtons(back, Color.YELLOW,124,371,30);
-		initButtons(right, Color.YELLOW,124,371,30);
-		initButtons(left, Color.YELLOW,124,371,30);
+		//frame = new JFrame();
+		//frame.getContentPane().setBackground(Color.BLACK);
+		//frame.setBounds(100, 100, 450, 614);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.getContentPane().setLayout(null);
+		this.setBounds(100, 100, 450, 614);
+		this.setVisible(true);
+		this.getContentPane().setLayout(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		initButtons(up, Color.BLUE,124,77,30, this);
+		initButtons(front, Color.WHITE,124,175,30, this);
+		initButtons(bottom, Color.GREEN,124,273,30, this);
+		initButtons(back, Color.YELLOW,124,371,30, this);
+		initButtons(right, Color.YELLOW,124,371,30, this);
+		initButtons(left, Color.YELLOW,124,371,30, this);
 	}
-	private void initButtons(JButton[] buttons, Color c, int x, int y, int w) {
+	private void initButtons(JButton[] buttons, Color c, int x, int y, int w, JFrame f) {
 		int d = w + 2;
 		for (int i = 0; i < up.length; i++) {
 			buttons[i] = new JButton(i+"");
@@ -64,8 +68,9 @@ public class View extends JFrame implements ActionListener{
 			buttons[i].setForeground(c);
 			buttons[i].setBorderPainted(false);
 			buttons[i].setOpaque(true);
-			frame.getContentPane().add(buttons[i]);
+			f.getContentPane().add(buttons[i]);
 			buttons[i].setBounds(x + d*(i%3)	,y + d*(i/3)	,w, w);
+			buttons[i].addActionListener(this);
 		}
 	}
 
