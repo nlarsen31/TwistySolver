@@ -64,9 +64,16 @@ public class Controller extends View implements ActionListener{
 		if(Arrays.asList(front).contains(clicked)) {
 			System.out.printf("FRONT %d\n",Arrays.asList(front).indexOf(clicked));
 		}
+		
 		if(clicked.equals(upTurn)) {
 			System.out.println("turn the cube top");
 			cube.upTurn();
+		} else if(clicked.equals(bottomTurn)) {
+			System.out.println("turn the cube bottom");
+			cube.bottomTurn();
+		} else if(clicked.equals(rightTurn)) {
+			System.out.println("turn the right of the cube");
+			cube.rightTurn();
 		}
 		updateView(cube);
 		validate();

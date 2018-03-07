@@ -77,6 +77,40 @@ public class Cube extends Piece{
 		
 		c[3] = temp2;
 		c[3].swapFbRl();
+	}
+	public void bottomTurn() {
+		Wedge temp1 = w[4];
+		w[4] = w[7];
+		w[7] = w[6];
+		w[6] = w[5];
+		w[5] = temp1;
+		
+		Corner temp2 = c[4];
+		c[4] = c[7];
+		c[4].swapFbRl();
+		c[7] = c[6];
+		c[7].swapFbRl();
+		c[6] = c[5];
+		c[6].swapFbRl();
+		c[5] = temp2;
+		c[5].swapFbRl();	
+	}
+	public void rightTurn() {
+		Wedge temp1 = w[1];
+		w[1] = w[9];
+		w[9] = w[5];
+		w[5] = w[10];
+		w[10] = temp1;
+		
+		Corner temp2 = c[1];
+		c[1] = c[5];
+		c[1].swapUbFb();
+		c[5] = c[6];
+		c[5].swapUbFb();
+		c[6] = c[2];
+		c[6].swapUbFb();
+		c[2] = temp2;
+		c[2].swapUbFb();
 		
 	}
 }

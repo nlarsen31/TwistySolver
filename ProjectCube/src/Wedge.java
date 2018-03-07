@@ -20,4 +20,10 @@ public class Wedge  extends Piece {
 			return true;
 		}
 	}
+	public void swapColor() {
+		// TODO Auto-generated method stub
+		int temp = primaryColor;
+		primaryColor = secondaryColor;
+		secondaryColor = temp;
+	}
 }
