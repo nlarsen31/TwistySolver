@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,7 @@ import javax.swing.JButton;
 
 public class Controller extends View implements ActionListener{
 	
+	private Cube cube = new Cube();
 	/**
 	 * Launch the application.
 	 */
@@ -38,8 +40,9 @@ public class Controller extends View implements ActionListener{
 			left[i].addActionListener(this);
 			right[i].addActionListener(this);
 		}
+		updateView(cube);
+		this.validate();
 	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton clicked = (JButton)e.getSource();
@@ -61,9 +64,12 @@ public class Controller extends View implements ActionListener{
 		if(Arrays.asList(front).contains(clicked)) {
 			System.out.printf("FRONT %d\n",Arrays.asList(front).indexOf(clicked));
 		}
-		if(clicked.equals(frontTurn)) {
-			System.out.println("turn the cube front");
+		if(clicked.equals(upTurn)) {
+			System.out.println("turn the cube top");
+			cube.upTurn();
 		}
+		updateView(cube);
+		validate();
 	}
 
 }
