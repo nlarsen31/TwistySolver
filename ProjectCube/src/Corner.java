@@ -40,4 +40,9 @@ public class Corner extends Piece{
 		fbColor = ubColor;
 		ubColor = temp;
 	}
+	public void swapUbRl() {
+		int temp = ubColor;
+		ubColor = rlColor;
+		rlColor = temp;
+	}
 }

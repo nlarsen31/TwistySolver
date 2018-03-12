@@ -113,4 +113,67 @@ public class Cube extends Piece{
 		c[2].swapUbFb();
 		
 	}
+	public void leftTurn() {
+		Wedge temp1 = w[3];
+		w[3] = w[11];
+		w[11] = w[7];
+		w[7] = w[8];
+		w[8] = temp1;
+		
+		Corner temp2 = c[0];
+		c[0] = c[3];
+		c[0].swapUbFb();
+		c[3] = c[7];
+		c[3].swapUbFb();
+		c[7] = c[4];
+		c[7].swapUbFb();
+		c[4] = temp2;
+		c[4].swapUbFb();
+	}
+	public void frontTurn() {
+		Wedge temp = w[0];
+		w[0] = w[8];
+		w[0].swapColor();
+		w[8] = w[4];
+		w[8].swapColor();
+		w[4] = w[9];
+		w[4].swapColor();
+		w[9]  = temp;
+		w[9].swapColor();
+		
+		Corner temp2 = c[0];
+		c[0] = c[4];
+		c[0].swapUbRl();
+		c[4] = c[5];
+		c[4].swapUbRl();
+		c[5] = c[1];
+		c[5].swapUbRl();
+		c[1] = temp2;
+		c[1].swapUbRl();
+		
+	}
+	public void backTurn() {
+		Wedge temp1 = w[2];
+		w[2] = w[10];
+		w[2].swapColor();
+		w[10] = w[6];
+		w[10].swapColor();
+		w[6] = w[11];
+		w[6].swapColor();
+		w[11] = temp1;
+		w[11].swapColor();
+		
+		Corner temp2 = c[7];
+		c[7] = c[3];
+		c[7].swapUbRl();
+		c[3] = c[2];
+		c[3].swapUbRl();
+		c[2] = c[6];
+		c[2].swapUbRl();
+		c[6] = temp2;
+		c[6].swapUbRl();
+	}
+	
+	
+	
 }

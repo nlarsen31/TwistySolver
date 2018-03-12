@@ -74,6 +74,15 @@ public class Controller extends View implements ActionListener{
 		} else if(clicked.equals(rightTurn)) {
 			System.out.println("turn the right of the cube");
 			cube.rightTurn();
+		} else if(clicked.equals(leftTurn)) {
+			System.out.println("turn the left of the cube");
+			cube.leftTurn();
+		} else if(clicked.equals(frontTurn)) {
+			 System.out.println("turn the front of the cube");
+			 cube.frontTurn();
+		} else if(clicked.equals(backTurn)) {
+			System.out.println("turn the back of the cube");
+			cube.backTurn();
 		}
 		updateView(cube);
 		validate();
