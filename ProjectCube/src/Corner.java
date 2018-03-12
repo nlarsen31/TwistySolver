@@ -18,6 +18,13 @@ public class Corner extends Piece{
 		fbColor = f;
 		rlColor = r;
 	}
+	public Corner(Corner corner) {
+		// TODO Auto-generated constructor stub
+		position = corner.position;
+		ubColor =  corner.ubColor;
+		fbColor = corner.fbColor;
+		rlColor = corner.rlColor;
+	}
 	public boolean setAtt(int p, int u, int f, int r) {
 		if(p<0 || p>11 || u<0 || u>5 || f<0 || f>5 || r<0 || r>5) {
 			return false;

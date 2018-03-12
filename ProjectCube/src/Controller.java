@@ -26,12 +26,7 @@ public class Controller extends View implements ActionListener{
 	}
 	public Controller() {
 		super();
-		super.leftTurn.addActionListener(this);
-		this.rightTurn.addActionListener(this);
-		this.backTurn.addActionListener(this);
-		this.frontTurn.addActionListener(this);
-		this.bottomTurn.addActionListener(this);
-		this.upTurn.addActionListener(this);
+		addListeners();
 		for (int i = 0; i < back.length; i++) {
 			back[i].addActionListener(this);
 			up[i].addActionListener(this);
@@ -43,9 +38,22 @@ public class Controller extends View implements ActionListener{
 		updateView(cube);
 		this.validate();
 	}
+	private void addListeners() {
+		// TODO Auto-generated method stub
+		leftTurn.addActionListener(this);
+		rightTurn.addActionListener(this);
+		backTurn.addActionListener(this);
+		frontTurn.addActionListener(this);
+		bottomTurn.addActionListener(this);
+		upTurn.addActionListener(this);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+		removeListeners();
 		JButton clicked = (JButton)e.getSource();
+		//code for button tiles
 		if(Arrays.asList(up).contains(clicked)) {
 			System.out.printf("UP %d\n",Arrays.asList(up).indexOf(clicked));
 		}
@@ -65,6 +73,8 @@ public class Controller extends View implements ActionListener{
 			System.out.printf("FRONT %d\n",Arrays.asList(front).indexOf(clicked));
 		}
 		
+		
+		//code for turn buttons
 		if(clicked.equals(upTurn)) {
 			System.out.println("turn the cube top");
 			cube.upTurn();
@@ -84,8 +94,19 @@ public class Controller extends View implements ActionListener{
 			System.out.println("turn the back of the cube");
 			cube.backTurn();
 		}
+		addListeners();
 		updateView(cube);
+		update(this.getGraphics());
 		validate();
+	}
+	private void removeListeners() {
+		// TODO Auto-generated method stub
+		leftTurn.removeActionListener(this);
+		rightTurn.removeActionListener(this);
+		backTurn.removeActionListener(this);
+		frontTurn.removeActionListener(this);
+		bottomTurn.removeActionListener(this);
+		upTurn.removeActionListener(this);
 	}
 
 }

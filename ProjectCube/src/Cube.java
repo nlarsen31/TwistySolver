@@ -56,7 +56,11 @@ public class Cube extends Piece{
 		c[6] = new Corner(BOTTOM_BACK_RIGHT	,GREEN	,YELLOW	,RED);
 		c[7] = new Corner(BOTTOM_BACK_LEFT	,GREEN	,YELLOW	,ORANGE);
 	}
-
+	
+	private void removeListeners() {
+		// TODO Auto-generated method stub
+		
+	}
 	public void upTurn() {
 		//rotate edges
 		Wedge temp1 = w[0];
@@ -103,13 +107,13 @@ public class Cube extends Piece{
 		w[10] = temp1;
 		
 		Corner temp2 = c[1];
-		c[1] = c[5];
+		c[1] = new Corner(c[5]);
 		c[1].swapUbFb();
-		c[5] = c[6];
+		c[5] = new Corner(c[6]);
 		c[5].swapUbFb();
-		c[6] = c[2];
+		c[6] = new Corner(c[2]);
 		c[6].swapUbFb();
-		c[2] = temp2;
+		c[2] = new Corner(temp2);
 		c[2].swapUbFb();
 		
 	}
