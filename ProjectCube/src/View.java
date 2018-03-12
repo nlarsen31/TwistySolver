@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -49,7 +51,7 @@ public class View extends JFrame{
 	 */
 	JButton up[] = new JButton[9];
 	JButton front[] = new JButton[9];
-	JButton bottom[] = new JButton[9];
+	JButton down[] = new JButton[9];
 	JButton back[] = new JButton[9];
 	JButton right[] = new JButton[9];
 	JButton left[] = new JButton[9];
@@ -57,27 +59,39 @@ public class View extends JFrame{
 			rightTurn = new JButton("right"),
 			backTurn = new JButton("back"),
 			frontTurn = new JButton("front"),
-			upTurn = new JButton("top"),
-			bottomTurn = new JButton("bottom");
+			upTurn = new JButton("up"),
+			downTurn = new JButton("bottom"),
+			flip = new JButton("Flip Dir");
+	JTextField turnList = new JTextField(25);
+	JButton runTurns = new JButton("Run Turns");
 	private void initialize() {
 		
 		
 		this.getContentPane().setLayout(null);
-		JPanel turns = new JPanel(new GridLayout(2,3));
+		JPanel turns = new JPanel(new GridLayout(2,4));
 		turns.add(upTurn);
 		turns.add(frontTurn);
 		turns.add(leftTurn);
-		turns.add(bottomTurn);
+		turns.add(flip);
+		turns.add(downTurn);
 		turns.add(backTurn);
 		turns.add(rightTurn);
 		turns.setBounds(22,475,294,100);
 		this.getContentPane().add(turns);
-		this.setBounds(100, 101, 450, 614);
+		
+		JPanel turnListPan = new JPanel(new FlowLayout());
+		turnListPan.setBounds(22,575,325,100);
+		turnListPan.add(turnList);
+		turnListPan.add(runTurns);
+		turnList.setVisible(true);
+		this.getContentPane().add(turnListPan);
+		
+		this.setBounds(100, 101, 450, 670);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initButtons(up, Color.BLUE,124,77,30, this);
 		initButtons(front, Color.WHITE,124,175,30, this);
-		initButtons(bottom, Color.GREEN,124,273,30, this);
+		initButtons(down, Color.GREEN,124,273,30, this);
 		initButtons(back, Color.YELLOW,124,371,30, this);
 		initButtons(right, Color.RED,222,175,30, this);
 		initButtons(left, Color.ORANGE,26,175,30, this);
@@ -117,13 +131,13 @@ public class View extends JFrame{
 		back[3].setBackground(getColor(cube.w[11].primaryColor));
 		left[3].setBackground(getColor(cube.w[11].secondaryColor));
 		//BottomLayer wedges
-		bottom[1].setBackground(getColor(cube.w[4].primaryColor));
+		down[1].setBackground(getColor(cube.w[4].primaryColor));
 		front[7].setBackground(getColor(cube.w[4].secondaryColor));
-		bottom[5].setBackground(getColor(cube.w[5].primaryColor));
+		down[5].setBackground(getColor(cube.w[5].primaryColor));
 		right[7].setBackground(getColor(cube.w[5].secondaryColor));
-		bottom[7].setBackground(getColor(cube.w[6].primaryColor));
+		down[7].setBackground(getColor(cube.w[6].primaryColor));
 		back[1].setBackground(getColor(cube.w[6].secondaryColor));
-		bottom[3].setBackground(getColor(cube.w[7].primaryColor));
+		down[3].setBackground(getColor(cube.w[7].primaryColor));
 		left[7].setBackground(getColor(cube.w[7].secondaryColor));
 		//Top Layer Corners
 		up[6].setBackground(getColor(cube.c[0].ubColor));
@@ -142,19 +156,19 @@ public class View extends JFrame{
 		back[6].setBackground(getColor(cube.c[3].fbColor));
 		left[0].setBackground(getColor(cube.c[3].rlColor));
 		//Bottom Layer Corners
-		bottom[0].setBackground(getColor(cube.c[4].ubColor));
+		down[0].setBackground(getColor(cube.c[4].ubColor));
 		front[6].setBackground(getColor(cube.c[4].fbColor));
 		left[8].setBackground(getColor(cube.c[4].rlColor)); 
 		
-		bottom[2].setBackground(getColor(cube.c[5].ubColor));
+		down[2].setBackground(getColor(cube.c[5].ubColor));
 		front[8].setBackground(getColor(cube.c[5].fbColor));
 		right[6].setBackground(getColor(cube.c[5].rlColor));
 		
-		bottom[8].setBackground(getColor(cube.c[6].ubColor));
+		down[8].setBackground(getColor(cube.c[6].ubColor));
 		back[2].setBackground(getColor(cube.c[6].fbColor));
 		right[8].setBackground(getColor(cube.c[6].rlColor));
 		
-		bottom[6].setBackground(getColor(cube.c[7].ubColor));
+		down[6].setBackground(getColor(cube.c[7].ubColor));
 		back[0].setBackground(getColor(cube.c[7].fbColor));
 		left[6].setBackground(getColor(cube.c[7].rlColor));
 		

@@ -1,3 +1,5 @@
+import java.util.StringTokenizer;
+
 /*
  * w and c make up and represent a rubiks cube. Each peice has a primaryColor, secondaryColor (ThirdColor)
  * The colors take presedence based on sides (TOP/Bottom) > (Front/Back) > (Left/Right)
@@ -82,7 +84,7 @@ public class Cube extends Piece{
 		c[3] = temp2;
 		c[3].swapFbRl();
 	}
-	public void bottomTurn() {
+	public void downTurn() {
 		Wedge temp1 = w[4];
 		w[4] = w[7];
 		w[7] = w[6];
@@ -178,6 +180,35 @@ public class Cube extends Piece{
 		c[6].swapUbRl();
 	}
 	
-	
-	
+	public boolean runTurns(String s) {
+		System.out.println("Running turns " + s);
+		StringTokenizer toks = new StringTokenizer(s, "UDLRFB2\'", true);
+		String last = "";
+		while(toks.hasMoreTokens()) {
+			String turn = toks.nextToken();
+			char t = turn.charAt(0);
+			if(t == '2') {
+				turn(last);
+			} else if(t == '\'') {
+				turn(last);
+				turn(last);
+			} else {
+				turn(turn);
+				last = turn;
+			}
+		}
+		return true;
+	}
+	public boolean turn(String s) {
+		System.out.println("turn" + s);
+		switch(s) {
+		case "U"		: upTurn(); return true;
+		case "D"		: downTurn(); return true;
+		case "L"		: leftTurn(); return true;
+		case "R"		: rightTurn(); return true;
+		case "F"		: frontTurn(); return true;
+		case "B"		: backTurn(); return true;
+		default: return false;
+		}
+	}
 }
