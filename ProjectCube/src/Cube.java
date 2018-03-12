@@ -29,10 +29,21 @@ public class Cube extends Piece{
 	protected final int BOTTOM_BACK_RIGHT = 7;
 	Wedge[] w = new Wedge[12];
 	Corner[] c = new Corner[8];
+	int[] centers = new int[6];
 	
 	public Cube() {
 		setUpW();
 		setUpC();
+		setUpCenter();
+	}
+	private void setUpCenter() {
+		// TODO Auto-generated method stub
+		centers[0] = BLUE;
+		centers[1] = GREEN;
+		centers[2] = WHITE;
+		centers[3] = YELLOW;
+		centers[4] = RED;
+		centers[5] = ORANGE;
 	}
 	private void setUpW() {
 		w[0] = new Wedge(TOP_FRONT	,BLUE	,WHITE);
@@ -59,11 +70,7 @@ public class Cube extends Piece{
 		c[7] = new Corner(BOTTOM_BACK_LEFT	,GREEN	,YELLOW	,ORANGE);
 	}
 	
-	private void removeListeners() {
-		// TODO Auto-generated method stub
-		
-	}
-	public void upTurn() {
+	void upTurn() {
 		//rotate edges
 		Wedge temp1 = w[0];
 		w[0] = w[1];
@@ -84,7 +91,7 @@ public class Cube extends Piece{
 		c[3] = temp2;
 		c[3].swapFbRl();
 	}
-	public void downTurn() {
+	void downTurn() {
 		Wedge temp1 = w[4];
 		w[4] = w[7];
 		w[7] = w[6];
@@ -101,7 +108,7 @@ public class Cube extends Piece{
 		c[5] = temp2;
 		c[5].swapFbRl();	
 	}
-	public void rightTurn() {
+	void rightTurn() {
 		Wedge temp1 = w[1];
 		w[1] = w[9];
 		w[9] = w[5];
@@ -119,7 +126,7 @@ public class Cube extends Piece{
 		c[2].swapUbFb();
 		
 	}
-	public void leftTurn() {
+	void leftTurn() {
 		Wedge temp1 = w[3];
 		w[3] = w[11];
 		w[11] = w[7];
@@ -136,7 +143,7 @@ public class Cube extends Piece{
 		c[4] = temp2;
 		c[4].swapUbFb();
 	}
-	public void frontTurn() {
+	void frontTurn() {
 		Wedge temp = w[0];
 		w[0] = w[8];
 		w[0].swapColor();
@@ -158,7 +165,7 @@ public class Cube extends Piece{
 		c[1].swapUbRl();
 		
 	}
-	public void backTurn() {
+	void backTurn() {
 		Wedge temp1 = w[2];
 		w[2] = w[10];
 		w[2].swapColor();
@@ -199,6 +206,92 @@ public class Cube extends Piece{
 		}
 		return true;
 	}
+	/// rotate layers between L and R
+	void mTurn() {
+		//centers
+		int temp1 = centers[0];
+		centers[0] = centers[3];
+		centers[3] = centers[1];
+		centers[1] = centers[2];
+		centers[2] = temp1;
+		//wedges
+		Wedge temp2 = w[0];
+		w[0] = w[2];
+		w[0].swapColor();
+		w[2] = w[6];
+		w[2].swapColor();
+		w[6] = w[4];
+		w[6].swapColor();
+		w[4] = temp2;
+		w[4].swapColor();
+	}
+	///rotate layers between F and B
+	void sTurn() {
+		//centers
+		int temp1 = centers[0];
+		centers[0] = centers[5];
+		centers[5] = centers[1];
+		centers[1] = centers[4];
+		centers[4] = temp1;
+		
+		Wedge temp2 = w[1];
+		w[1] = w[3];
+		w[1].swapColor();
+		w[3] = w[7];
+		w[3].swapColor();
+		w[7] = w[5];
+		w[7].swapColor();
+		w[5] = temp2;
+		w[5].swapColor();
+		
+	}
+	///rotate layers between U and D
+	void eTurn() {
+		//centers
+		int temp1 = centers[2];
+		centers[2] = centers[5];
+		centers[5] = centers[3];
+		centers[3] = centers[4];
+		centers[4] = temp1;
+		//wedges
+		Wedge temp2 = w[8];
+		w[8] = w[11];
+		w[8].swapColor();
+		w[11] = w[10];
+		w[11].swapColor();
+		w[10] = w[9];
+		w[10].swapColor();
+		w[9] = temp2;
+		w[9].swapColor();
+	}
+	/// rotate cube like F
+	void zTurn() {
+		frontTurn();
+		backTurn();
+		backTurn();
+		backTurn();
+		sTurn();
+	}
+	/// rotate cube like U
+	void yTurn() {
+		upTurn();
+		downTurn();
+		downTurn();
+		downTurn();
+		eTurn();
+		eTurn();
+		eTurn();
+	}
+	/// rotate cube like R
+	void xTurn() {
+		rightTurn();
+		leftTurn();
+		leftTurn();
+		leftTurn();
+		mTurn();
+		mTurn();
+		mTurn();
+	}
 	public boolean turn(String s) {
 		System.out.println("turn" + s);
 		switch(s) {
@@ -208,7 +301,14 @@ public class Cube extends Piece{
 		case "R"		: rightTurn(); return true;
 		case "F"		: frontTurn(); return true;
 		case "B"		: backTurn(); return true;
+		case "M" 	: mTurn(); return true;
+		case "E"		: eTurn(); return true;
+		case "S" 	: sTurn(); return true;
+		case "X"		: xTurn(); return true;
+		case "Y" 	: yTurn(); return true;
+		case "Z"		: zTurn(); return true;
 		default: return false;
 		}
 	}
+
 }

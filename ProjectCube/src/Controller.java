@@ -49,35 +49,55 @@ public class Controller extends View implements ActionListener{
 		frontTurn.addActionListener(this);
 		downTurn.addActionListener(this);
 		upTurn.addActionListener(this);
+		mTurn.addActionListener(this);
+		eTurn.addActionListener(this);
+		sTurn.addActionListener(this);
+		xTurn.addActionListener(this);
+		yTurn.addActionListener(this);
+		zTurn.addActionListener(this);
+	}
+	public void flipDir() {
+		if(upTurn.getText().equals("U")) {
+			upTurn.setText("U\'");
+			downTurn.setText("D\'");
+			leftTurn.setText("L\'");
+			rightTurn.setText("R\'");
+			backTurn.setText("B\'");
+			frontTurn.setText("F\'");
+			mTurn.setText("M\'");
+			eTurn.setText("E\'");
+			sTurn.setText("S\'");
+			xTurn.setText("X\'");
+			yTurn.setText("Y\'");
+			zTurn.setText("Z\'");
+			cc = true;
+		} else {
+			upTurn.setText("U");
+			downTurn.setText("D");
+			leftTurn.setText("L");
+			rightTurn.setText("R");
+			backTurn.setText("B");
+			frontTurn.setText("F");
+			mTurn.setText("M");
+			eTurn.setText("E");
+			sTurn.setText("S");
+			xTurn.setText("X");
+			yTurn.setText("Y");
+			zTurn.setText("Z");
+			cc = false;
+		}
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		removeListeners();
 		JButton clicked = (JButton)e.getSource();
 		//other buttons
 		if(e.getActionCommand().equals("Run Turns")) {
 			cube.runTurns(super.turnList.getText());
 		}
-		if(e.getActionCommand().equals("Flip Dir")) {
-			if(upTurn.getText().equals("up")) {
-				upTurn.setText("up\'");
-				downTurn.setText("down\'");
-				leftTurn.setText("left\'");
-				rightTurn.setText("right\'");
-				backTurn.setText("back\'");
-				frontTurn.setText("front\'");
-				cc = true;
-			} else {
-				upTurn.setText("up");
-				downTurn.setText("down");
-				leftTurn.setText("left");
-				rightTurn.setText("right");
-				backTurn.setText("back");
-				frontTurn.setText("front");
-				cc = false;
-			}
+		else if(e.getActionCommand().equals("Flip Dir")) {
+			flipDir();
 		}
 		//code for button tiles
 		if(Arrays.asList(up).contains(clicked)) {
@@ -143,6 +163,42 @@ public class Controller extends View implements ActionListener{
 				cube.backTurn();
 				cube.backTurn();
 			}
+		} else if(clicked.equals(mTurn)) {
+			cube.mTurn();
+			if(cc) {
+				cube.mTurn();
+				cube.mTurn();
+			}
+		} else if(clicked.equals(sTurn)) {
+			cube.sTurn();
+			if(cc) {
+				cube.sTurn();
+				cube.sTurn();
+			}
+		} else if(clicked.equals(eTurn)) {
+			cube.eTurn();
+			if(cc) {
+				cube.eTurn();
+				cube.eTurn();
+			}
+		} else if(clicked.equals(xTurn)) {
+			cube.xTurn();
+			if(cc) {
+				cube.xTurn();
+				cube.xTurn();
+			}
+		} else if(clicked.equals(yTurn)) {
+			cube.yTurn();
+			if(cc) {
+				cube.yTurn();
+				cube.yTurn();
+			}
+		} else if(clicked.equals(zTurn)) {
+			cube.zTurn();
+			if(cc) {
+				cube.zTurn();
+				cube.zTurn();
+			}
 		}
 		addListeners();
 		updateView(cube);
@@ -157,6 +213,12 @@ public class Controller extends View implements ActionListener{
 		frontTurn.removeActionListener(this);
 		downTurn.removeActionListener(this);
 		upTurn.removeActionListener(this);
+		mTurn.removeActionListener(this);
+		eTurn.removeActionListener(this);
+		sTurn.removeActionListener(this);
+		xTurn.removeActionListener(this);
+		yTurn.removeActionListener(this);
+		zTurn.removeActionListener(this);
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JButton;
 
@@ -55,12 +56,18 @@ public class View extends JFrame{
 	JButton back[] = new JButton[9];
 	JButton right[] = new JButton[9];
 	JButton left[] = new JButton[9];
-	JButton leftTurn = new JButton("left"),
-			rightTurn = new JButton("right"),
-			backTurn = new JButton("back"),
-			frontTurn = new JButton("front"),
-			upTurn = new JButton("up"),
-			downTurn = new JButton("bottom"),
+	JButton leftTurn = new JButton("L"),
+			rightTurn = new JButton("R"),
+			backTurn = new JButton("B"),
+			frontTurn = new JButton("F"),
+			upTurn = new JButton("U"),
+			downTurn = new JButton("D"),
+			xTurn = new JButton("X"),
+			yTurn = new JButton("Y"),
+			zTurn = new JButton("Z"),
+			mTurn = new JButton("M"),
+			eTurn = new JButton("E"),
+			sTurn = new JButton("S"),
 			flip = new JButton("Flip Dir");
 	JTextField turnList = new JTextField(25);
 	JButton runTurns = new JButton("Run Turns");
@@ -68,19 +75,29 @@ public class View extends JFrame{
 		
 		
 		this.getContentPane().setLayout(null);
-		JPanel turns = new JPanel(new GridLayout(2,4));
-		turns.add(upTurn);
-		turns.add(frontTurn);
-		turns.add(leftTurn);
-		turns.add(flip);
-		turns.add(downTurn);
-		turns.add(backTurn);
-		turns.add(rightTurn);
-		turns.setBounds(22,475,294,100);
+		JPanel layersTurns = new JPanel(new GridLayout(4,3));
+		JPanel turns = new JPanel(new BorderLayout());
+		layersTurns.add(upTurn);
+		layersTurns.add(frontTurn);
+		layersTurns.add(leftTurn);
+		layersTurns.add(downTurn);
+		layersTurns.add(backTurn);
+		layersTurns.add(rightTurn);
+		layersTurns.add(mTurn);
+		layersTurns.add(eTurn);
+		layersTurns.add(sTurn);
+		layersTurns.add(xTurn);
+		layersTurns.add(yTurn);
+		layersTurns.add(zTurn);
+		turns.add(layersTurns, BorderLayout.CENTER);
+		turns.add(flip, BorderLayout.SOUTH);
+		
+		
+		turns.setBounds(22,445,294,100);
 		this.getContentPane().add(turns);
 		
 		JPanel turnListPan = new JPanel(new FlowLayout());
-		turnListPan.setBounds(22,575,325,100);
+		turnListPan.setBounds(22,545,325,100);
 		turnListPan.add(turnList);
 		turnListPan.add(runTurns);
 		turnList.setVisible(true);
@@ -89,12 +106,12 @@ public class View extends JFrame{
 		this.setBounds(100, 101, 450, 670);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		initButtons(up, Color.BLUE,124,77,30, this);
-		initButtons(front, Color.WHITE,124,175,30, this);
-		initButtons(down, Color.GREEN,124,273,30, this);
-		initButtons(back, Color.YELLOW,124,371,30, this);
-		initButtons(right, Color.RED,222,175,30, this);
-		initButtons(left, Color.ORANGE,26,175,30, this);
+		initButtons(up, Color.BLUE,124,17,30, this);
+		initButtons(front, Color.WHITE,124,115,30, this);
+		initButtons(down, Color.GREEN,124,213,30, this);
+		initButtons(back, Color.YELLOW,124,311,30, this);
+		initButtons(right, Color.RED,222,115,30, this);
+		initButtons(left, Color.ORANGE,26,115,30, this);
 		
 		
 	}
@@ -171,6 +188,15 @@ public class View extends JFrame{
 		down[6].setBackground(getColor(cube.c[7].ubColor));
 		back[0].setBackground(getColor(cube.c[7].fbColor));
 		left[6].setBackground(getColor(cube.c[7].rlColor));
+		
+
+		up[4].setBackground(getColor(cube.centers[0]));
+		down[4].setBackground(getColor(cube.centers[1]));
+		front[4].setBackground(getColor(cube.centers[2]));
+		back[4].setBackground(getColor(cube.centers[3]));
+		right[4].setBackground(getColor(cube.centers[4]));
+		left[4].setBackground(getColor(cube.centers[5]));
+		
 		
 	}
 
