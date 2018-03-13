@@ -1,0 +1,8 @@
+/.metadata/
+ProjectCube/bin/Controller$1.class
+ProjectCube/bin/Controller.class
+ProjectCube/bin/*.class
+.DS_Store
+RemoteSystemsTempFiles/
+ProjectCube.out.xml
+.recommenders/
