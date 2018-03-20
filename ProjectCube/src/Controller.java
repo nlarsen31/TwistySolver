@@ -28,6 +28,7 @@ public class Controller extends View implements ActionListener{
 	public Controller() {
 		super();
 		runTurns.addActionListener(this);
+		solve.addActionListener(this);
 		flip.addActionListener(this);
 		addListeners();
 		for (int i = 0; i < back.length; i++) {

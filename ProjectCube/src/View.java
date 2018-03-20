@@ -71,6 +71,7 @@ public class View extends JFrame{
 			flip = new JButton("Flip Dir");
 	JTextField turnList = new JTextField(25);
 	JButton runTurns = new JButton("Run Turns");
+	JButton solve = new JButton("Solve");
 	private void initialize() {
 		
 		
@@ -100,6 +101,7 @@ public class View extends JFrame{
 		turnListPan.setBounds(22,545,325,100);
 		turnListPan.add(turnList);
 		turnListPan.add(runTurns);
+		turnListPan.add(solve);
 		turnList.setVisible(true);
 		this.getContentPane().add(turnListPan);
 		
