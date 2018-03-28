@@ -36,6 +36,7 @@ public class Cube extends Piece{
 		setUpW();
 		setUpC();
 		setUpCenter();
+		
 	}
 	private void setUpCenter() {
 		// TODO Auto-generated method stub
@@ -296,25 +297,56 @@ public class Cube extends Piece{
 	public boolean turn(String s) {
 		System.out.println("turn" + s);
 		switch(s) {
-		case "U"		: upTurn(); return true;
-		case "D"		: downTurn(); return true;
-		case "L"		: leftTurn(); return true;
-		case "R"		: rightTurn(); return true;
-		case "F"		: frontTurn(); return true;
-		case "B"		: backTurn(); return true;
+		case "U"	: upTurn(); return true;
+		case "D"	: downTurn(); return true;
+		case "L"	: leftTurn(); return true;
+		case "R"	: rightTurn(); return true;
+		case "F"	: frontTurn(); return true;
+		case "B"	: backTurn(); return true;
 		case "M" 	: mTurn(); return true;
-		case "E"		: eTurn(); return true;
+		case "E"	: eTurn(); return true;
 		case "S" 	: sTurn(); return true;
-		case "X"		: xTurn(); return true;
+		case "X"	: xTurn(); return true;
 		case "Y" 	: yTurn(); return true;
-		case "Z"		: zTurn(); return true;
+		case "Z"	: zTurn(); return true;
 		default: return false;
 		}
 	}
+	// MARK - The Following methods are for solving the cube
 	public void solve() {
 		// TODO Auto-generated method stub
 		System.out.println("Solving the Cube");
+		
 	}
+	public void placeWedgeCross(int cross, int other) {
+		int index = -1;
+		for (int i = 0; i < w.length && index == -1; i++) {
+			if((w[i].primaryColor == cross && w[i].secondaryColor == other) || 
+					(w[i].primaryColor == other && w[i].secondaryColor == cross) ) {
+				index = i;
+			} 
+			//here the edge can be either on top, in the middle or on the bottom
+			//We will move it to the bottom no matter where it is then move it to the top
+			//Top
+			if(index == 0)
+				runTurns("F2");
+			else if(index == 1)
+				runTurns("R2");
+			else if(index == 2)
+				runTurns("B2");
+			else if(index == 3)
+				runTurns("L2");
+			//Middle
+			if(index == 8 || index == 9)
+				runTurns("FDF'");
+			else if(index == 11 || index == 10)
+				runTurns("BDB'");
+			//Now we can guarantee that the wedge we are looking at is on the bottom layer.
+			
+		}
+	}
+	
+	
 	public String scramble() {
 		String solveTurns = "";
 		Random randy = new Random();

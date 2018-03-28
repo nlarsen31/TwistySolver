@@ -123,7 +123,7 @@ public class Controller extends View implements ActionListener{
 		else if(Arrays.asList(back).contains(clicked)) {
 			System.out.printf("BACK %d\n",Arrays.asList(back).indexOf(clicked));
 		}
-		if(Arrays.asList(front).contains(clicked)) {
+		else if(Arrays.asList(front).contains(clicked)) {
 			System.out.printf("FRONT %d\n",Arrays.asList(front).indexOf(clicked));
 		}
 		
