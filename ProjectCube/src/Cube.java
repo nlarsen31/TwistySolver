@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.StringTokenizer;
 
 /*
@@ -309,6 +310,56 @@ public class Cube extends Piece{
 		case "Z"		: zTurn(); return true;
 		default: return false;
 		}
+	}
+	public void solve() {
+		// TODO Auto-generated method stub
+		System.out.println("Solving the Cube");
+	}
+	public String scramble() {
+		String solveTurns = "";
+		Random randy = new Random();
+		for (int i = 0; i < 25; i++) {
+			int r = randy.nextInt() % 18;
+			switch(r) {
+			case 0: upTurn(); 
+				solveTurns = "U'" + solveTurns; break;
+			case 1: downTurn(); 
+				solveTurns = "D'" + solveTurns; break;
+			case 2: frontTurn(); 
+				solveTurns = "F'" + solveTurns; break;
+			case 3: backTurn(); 
+				solveTurns = "B'" + solveTurns; break;
+			case 4: leftTurn(); 
+				solveTurns = "L'" + solveTurns; break;
+			case 5: rightTurn(); 
+				solveTurns = "R'" + solveTurns; break;
+			case 6: upTurn(); upTurn(); 
+				solveTurns = "U2" + solveTurns; break;
+			case 7: downTurn(); downTurn(); 
+				solveTurns = "D2" + solveTurns; break;
+			case 8: frontTurn();frontTurn();
+				solveTurns = "F2" + solveTurns; break;
+			case 9: backTurn(); backTurn();
+				solveTurns = "B2" + solveTurns; break;
+			case 10: leftTurn();leftTurn();
+				solveTurns = "L2" + solveTurns; break;
+			case 11: rightTurn();rightTurn();
+				solveTurns = "R2" + solveTurns; break;
+			case 12: upTurn(); upTurn(); upTurn(); 
+				solveTurns = "U" + solveTurns; break;
+			case 13: downTurn(); downTurn(); 
+				solveTurns = "D" + solveTurns; break;
+			case 14: frontTurn(); frontTurn(); frontTurn(); 
+				solveTurns = "F" + solveTurns; break;
+			case 15: backTurn(); backTurn(); backTurn(); 
+				solveTurns = "B" + solveTurns; break;
+			case 16: leftTurn(); leftTurn(); leftTurn(); 
+				solveTurns = "L" + solveTurns; break;
+			case 17: rightTurn(); rightTurn(); rightTurn(); 
+				solveTurns = "R" + solveTurns; break;
+			}
+		}
+		return solveTurns;
 	}
 
 }

@@ -30,6 +30,7 @@ public class Controller extends View implements ActionListener{
 		runTurns.addActionListener(this);
 		solve.addActionListener(this);
 		flip.addActionListener(this);
+		scramble.addActionListener(this);
 		addListeners();
 		for (int i = 0; i < back.length; i++) {
 			back[i].addActionListener(this);
@@ -99,6 +100,12 @@ public class Controller extends View implements ActionListener{
 		}
 		else if(e.getActionCommand().equals("Flip Dir")) {
 			flipDir();
+		}
+		else if(e.getActionCommand().equals("Solve")) {
+			cube.solve();
+		}
+		else if(e.getActionCommand().equals("Scramble")) {
+			turnList.setText(cube.scramble());
 		}
 		//code for button tiles
 		if(Arrays.asList(up).contains(clicked)) {
