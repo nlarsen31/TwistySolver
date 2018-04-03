@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -60,6 +61,34 @@ public class Cube extends Piece{
 		w[9] = new Wedge(FRONT_RIGHT	,WHITE	,RED);
 		w[10] = new Wedge(BACK_RIGHT	,YELLOW	,RED);
 		w[11] = new Wedge(BACK_LEFT	,YELLOW	,ORANGE);
+		w[0].position = 0;
+		w[1].position = 1;
+		w[2].position = 2;
+		w[3].position = 3;
+		w[4].position = 4;
+		w[5].position = 5;
+		w[6].position = 6;
+		w[7].position = 7;
+		w[8].position = 8;
+		w[9].position = 9;
+		w[10].position = 10;
+		w[11].position = 11;
+	}
+	private void setPos() {
+		for (int i = 0; i < c.length; i++) {
+			c[i].position = i;
+		}
+		for (int i = 0; i < w.length; i++) {
+			w[i].position = i;
+		}
+	}
+	private void setCorrectPos() {
+		for (int i = 0; i < c.length; i++) {
+			c[i].correctPosition = i;
+		}
+		for (int i = 0; i < w.length; i++) {
+			w[i].correctPosition = i;
+		}
 	}
 	private void setUpC() {
 		c[0] = new Corner(TOP_FRONT_LEFT		,BLUE	,WHITE	,ORANGE);
@@ -70,6 +99,7 @@ public class Cube extends Piece{
 		c[5] = new Corner(BOTTOM_FRONT_RIGHT	,GREEN	,WHITE	,RED);
 		c[6] = new Corner(BOTTOM_BACK_RIGHT	,GREEN	,YELLOW	,RED);
 		c[7] = new Corner(BOTTOM_BACK_LEFT	,GREEN	,YELLOW	,ORANGE);
+		setPos();
 	}
 	
 	void upTurn() {
@@ -92,6 +122,8 @@ public class Cube extends Piece{
 		
 		c[3] = temp2;
 		c[3].swapFbRl();
+		
+		setPos();
 	}
 	void downTurn() {
 		Wedge temp1 = w[4];
@@ -108,7 +140,9 @@ public class Cube extends Piece{
 		c[6] = c[5];
 		c[6].swapFbRl();
 		c[5] = temp2;
-		c[5].swapFbRl();	
+		c[5].swapFbRl();
+
+		setPos();
 	}
 	void rightTurn() {
 		Wedge temp1 = w[1];
@@ -127,6 +161,7 @@ public class Cube extends Piece{
 		c[2] = new Corner(temp2);
 		c[2].swapUbFb();
 		
+		setPos();
 	}
 	void leftTurn() {
 		Wedge temp1 = w[3];
@@ -144,6 +179,8 @@ public class Cube extends Piece{
 		c[7].swapUbFb();
 		c[4] = temp2;
 		c[4].swapUbFb();
+
+		setPos();
 	}
 	void frontTurn() {
 		Wedge temp = w[0];
@@ -165,7 +202,8 @@ public class Cube extends Piece{
 		c[5].swapUbRl();
 		c[1] = temp2;
 		c[1].swapUbRl();
-		
+
+		setPos();
 	}
 	void backTurn() {
 		Wedge temp1 = w[2];
@@ -187,10 +225,12 @@ public class Cube extends Piece{
 		c[2].swapUbRl();
 		c[6] = temp2;
 		c[6].swapUbRl();
+
+		setPos();
 	}
 	
-	public boolean runTurns(String s) {
-		System.out.println("Running turns " + s);
+	public String runTurns(String s) {
+		//System.out.println("Running turns " + s);
 		StringTokenizer toks = new StringTokenizer(s, "UDLRFB2\'", true);
 		String last = "";
 		while(toks.hasMoreTokens()) {
@@ -206,7 +246,7 @@ public class Cube extends Piece{
 				last = turn;
 			}
 		}
-		return true;
+		return s;
 	}
 	/// rotate layers between L and R
 	void mTurn() {
@@ -295,7 +335,7 @@ public class Cube extends Piece{
 		mTurn();
 	}
 	public boolean turn(String s) {
-		System.out.println("turn" + s);
+		//System.out.println("turn" + s);
 		switch(s) {
 		case "U"	: upTurn(); return true;
 		case "D"	: downTurn(); return true;
@@ -316,37 +356,82 @@ public class Cube extends Piece{
 	public void solve() {
 		// TODO Auto-generated method stub
 		System.out.println("Solving the Cube");
+		String turns = "";
+		// MARK - solve the cross
+		ArrayList<Integer> positionsSolved = new ArrayList<Integer>();
+		Wedge wed = null;
+		// First find a wedge on top if possible to tuen to the bottom.
+		wed = getNextCross(super.BLUE);
+		if(wed != null) {
+			turns += placeCross(wed, super.BLUE);
+		}
+		positionsSolved.add(wed.position);
+		wed = getNextCross(super.BLUE);
+		if(wed != null) {
+			turns += placeCross(wed, super.BLUE);
+		}
+		System.out.println(turns);
 		
 	}
-	public void placeWedgeCross(int cross, int other) {
-		int index = -1;
-		for (int i = 0; i < w.length && index == -1; i++) {
-			if((w[i].primaryColor == cross && w[i].secondaryColor == other) || 
-					(w[i].primaryColor == other && w[i].secondaryColor == cross) ) {
-				index = i;
-			} 
-			//here the edge can be either on top, in the middle or on the bottom
-			//We will move it to the bottom no matter where it is then move it to the top
-			//Top
-			if(index == 0)
-				runTurns("F2");
-			else if(index == 1)
-				runTurns("R2");
-			else if(index == 2)
-				runTurns("B2");
-			else if(index == 3)
-				runTurns("L2");
-			//Middle
-			if(index == 8 || index == 9)
-				runTurns("FDF'");
-			else if(index == 11 || index == 10)
-				runTurns("BDB'");
-			//Now we can guarantee that the wedge we are looking at is on the bottom layer.
-			
+	private Wedge getNextCross(int crossColor) {
+		//find and place next piece
+		Wedge wed = null;
+		for(int i = 0; i < 3 && wed == null; i ++) {
+			if((w[i].primaryColor == crossColor || w[i].secondaryColor == crossColor) && w[i].position != w[i].correctPosition)
+				wed = w[i];
 		}
+		//check the bottom
+		for(int i = 4; i < 12 && wed == null; i ++) {
+			if((w[i].primaryColor == crossColor || w[i].secondaryColor == crossColor))
+				wed = w[i];
+		}
+		return wed;
 	}
-	
-	
+	private String placeCross(Wedge wed, int corssColor) {
+		String turns = "";
+		// TODO Auto-generated method stub
+		if(wed.position == 0)
+			turns += runTurns("F2");
+		if(wed.position == 1)
+			turns += runTurns("R2");
+		if(wed.position == 2)
+			turns += runTurns("B2");
+		if(wed.position == 3)
+			turns += runTurns("L2");
+		//These need to be tested
+		if(wed.position == 8)
+			turns += runTurns("F'DF");
+		if(wed.position == 9)
+			turns += runTurns("FDF'");
+		if(wed.position == 10)
+			turns += runTurns("B'DB");
+		if(wed.position == 11)
+			turns += runTurns("BDB'");
+		//From here if the above works we would have the wed on the bottom
+		if(wed.primaryColor == super.BLUE) 
+			while(wed.secondaryColor != centers[getCenter(wed)])
+				turns += runTurns("D");
+		else 
+			while(wed.primaryColor != centers[getCenter(wed)]) 
+				turns += runTurns("D");
+		if(wed.position == 4) {
+			turns += runTurns("F2");
+		} else if(wed.position == 5) {
+			turns += runTurns("R2");
+		} else if(wed.position == 6) {
+			turns += runTurns("B2");
+		} else if(wed.position == 7) {
+			turns += runTurns("L2");
+		}
+		return turns;
+	}
+	public int getCenter(Wedge wed) {
+		if(wed.position == 4) return 2;
+		if(wed.position == 7) return 4;
+		if(wed.position == 5) return 5;
+		if(wed.position == 6) return 3;
+		return -1;
+	}
 	public String scramble() {
 		String solveTurns = "";
 		Random randy = new Random();

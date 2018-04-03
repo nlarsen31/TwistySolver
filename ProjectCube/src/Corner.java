@@ -4,6 +4,7 @@ public class Corner extends Piece{
 	int ubColor;
 	int fbColor;
 	int rlColor;
+	int correctPosition;
 	protected final int TOP_FRONT_LEFT = 0;
 	protected final int TOP_FRONT_RIGHT = 1;
 	protected final int TOP_BACK_RIGHT = 2;

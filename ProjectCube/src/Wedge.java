@@ -3,6 +3,7 @@ public class Wedge  extends Piece {
 	int position;
 	int primaryColor;
 	int secondaryColor;
+	int correctPosition;
 	
 	public Wedge(int p, int pc, int sc) {
 		position = p;
